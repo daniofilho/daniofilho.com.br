@@ -1,0 +1,217 @@
+@import "reset";
+
+$text: #ffffff;
+$buttonBackground: #243b55;
+$shadow: rgba(255, 255, 255, 0.5);
+
+@keyframes fromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+@keyframes fromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
+}
+
+@mixin initialFromTopState() {
+  opacity: 0;
+  transform: translateY(-1rem);
+}
+
+@mixin initialFromLeftState() {
+  opacity: 0;
+  transform: translateX(-2rem);
+}
+
+* {
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  background: #141e30; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #243b55,
+    #141e30
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #243b55,
+    #141e30
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  min-height: 100vh;
+
+  display: flex;
+}
+
+main {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 2rem;
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    text-align: center;
+
+    margin-bottom: 2rem;
+
+    picture {
+      border-radius: 50%;
+      overflow: hidden;
+      max-width: 12rem;
+
+      border: 3px solid transparent;
+      box-shadow: 3px 3px 0 0 $shadow;
+
+      @include initialFromTopState;
+
+      animation-name: fromTop;
+      animation-duration: 0.4s;
+      animation-fill-mode: forwards;
+
+      @media (max-width: 991px) {
+        max-width: 8rem;
+      }
+    }
+
+    h1 {
+      color: $text;
+
+      font-size: 2.4rem;
+      font-weight: bold;
+
+      border-bottom: 3px solid $shadow;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+
+      @include initialFromTopState;
+
+      animation-name: fromTop;
+      animation-duration: 0.4s;
+      animation-delay: 0.3s;
+      animation-fill-mode: forwards;
+
+      @media (max-width: 991px) {
+        font-size: 1.8rem;
+      }
+    }
+
+    a {
+      color: $text;
+      opacity: 0.9;
+      font-size: 1rem;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  section {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    ul {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      li {
+        flex: 1;
+
+        background-color: $buttonBackground;
+
+        border: 2px solid $shadow;
+        border-radius: 10px;
+        box-shadow: 6px 6px 0 0px $shadow;
+
+        transition: 0.5s;
+
+        @include initialFromLeftState();
+
+        animation-name: fromLeft;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+
+        @for $i from 1 through 3 {
+          &:nth-child(#{$i}n) {
+            animation-delay: #{$i * 0.4}s;
+          }
+        }
+
+        &:hover {
+          picture,
+          a {
+            opacity: 1;
+          }
+        }
+
+        picture {
+          display: block;
+          max-width: 5rem;
+          padding: 1rem;
+          opacity: 0.9;
+
+          transition: 0.5s;
+
+          @media (max-width: 991px) {
+            max-width: 4rem;
+          }
+        }
+
+        a {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 2rem;
+          opacity: 0.9;
+          transition: 0.5s;
+
+          text-decoration: none;
+
+          span {
+            flex: 1;
+
+            color: $text;
+
+            font-size: 1.4rem;
+
+            @media (max-width: 991px) {
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
