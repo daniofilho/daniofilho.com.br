@@ -163,7 +163,7 @@ main {
         animation-duration: 0.8s;
         animation-fill-mode: forwards;
 
-        @for $i from 1 through 3 {
+        @for $i from 1 through 5 {
           &:nth-child(#{$i}n) {
             animation-delay: #{$i * 0.4}s;
           }
